@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Сен 22 2020 г., 00:47
--- Версия сервера: 5.7.23
--- Версия PHP: 7.2.10
+-- Хост: localhost:8889
+-- Время создания: Дек 12 2023 г., 14:13
+-- Версия сервера: 5.7.39
+-- Версия PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -36,16 +35,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id`, `email`, `password`, `phone`) VALUES
-(5, 'test@e.g', '098f6bcd4621d373cade4e832627b4f6', '+38 (050)123123'),
-(6, 'test@e.g', '75fe57ec4a047a300cac5f27223df81a', '+38 (050)123123'),
-(12, 'test@e.g', 'f93c488106cd8085077f3e41de08d904', '+38 (050)123123'),
-(16, 'test@e.g', '098f6bcd4621d373cade4e832627b4f6', '+38 (050)123123');
-
---
 -- Индексы сохранённых таблиц
 --
 
@@ -63,7 +52,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
