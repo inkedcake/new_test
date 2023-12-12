@@ -2,42 +2,43 @@
 class Bootstrap
 {
     public function __construct() {
-        $url = isset($_GET['url']) ? $_GET['url'] : null;
+        $url = $_SERVER['REQUEST_URI'];
 
-        if($url){
-            $url = rtrim($url, '/');
-            $url = explode('/', $url);
-        }
-        else
-        {
+        if ($url) {
+            $url = explode('/', trim($url, '/'));
+        } else {
             $url[0] = [];
         }
-        if(empty($url[0])) {
-            require 'Controllers/registerController.php';
+        
+        if (empty($url[0])) {
+            require  'Controllers/registerController.php';
             $controller = new Register();
             $controller->index();
-
-            return false;
+            exit;
         }
-        $file = 'Controllers/'.$url[0].'Controller.php';
-        if(file_exists($file)) {
+        
+        $file = 'Controllers/' . $url[0] . 'Controller.php';
+        
+        if (file_exists($file)) {
             require $file;
-        }
-        $class_name = ucfirst($url[0]);
-        $controller = new $class_name;
-        $controller->loadModel($url[0]);
-        if(isset($url[2])) {
-            if(method_exists($controller, $url[1])) {
-                $controller->{$url[1]}($url[2]);
+        
+            $class_name = $url[0];
+            $controller = new $class_name();
+            $controller->loadModel($url[0]);
+        
+            $action = isset($url[1]) ? $url[1] : 'index';
+        
+            if (method_exists($controller, $action)) {
+                if (isset($url[2])) {
+                    $controller->{$action}($url[2]);
+                } else {
+                    $controller->{$action}();
+                }
             } else {
-                echo 'Error!';
+                echo '404';
             }
         } else {
-            if(isset($url[1])) {
-                $controller->{$url[1]}();
-            } else {
-                $controller->index();
-            }
+            echo '404';
         }
     }
 }
